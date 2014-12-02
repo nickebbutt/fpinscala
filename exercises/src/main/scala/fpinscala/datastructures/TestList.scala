@@ -61,4 +61,14 @@ class TestListFunctions extends FlatSpec with Matchers {
     List.filter(List(1,2,3,4,5,6))((a) => (a % 2) == 0) should equal (List(2,4,6))
   }
 
+  "Test flat map " should " flatten and add function results " in {
+    val mapped = List.flatMap(List(1, 2, 3, 4, 5, 6))((a) => Cons(a, Cons(a * 2, Nil)))
+    mapped should equal (List(1,2,2,4,3,6,4,8,5,10,6,12))
+  }
+
+  "Test add pairwise " should " zip together list contents " in {
+    val zipped = List.addPairwise(List(1,2,3), List(2,4,6))
+    zipped should equal (List(3,6,9))
+  }
+
 }
