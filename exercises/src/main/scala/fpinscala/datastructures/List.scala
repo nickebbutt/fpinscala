@@ -162,8 +162,21 @@ This could also be implemented directly using `foldRight`.
     case (Nil, Nil) => Nil
   }
 
-  def zipWith[A](a: List[A], b: List[A])( add : (A, A) => A ): List[A] = (a, b) match {
-    case(Cons(h1, t1), Cons(h2, t2)) => Cons(add(h1, h2), zipWith(t1, t2)(add))
+  def zipWith[A,B,C](a: List[A], b: List[B])( combine : (A, B) => C ): List[C] = (a, b) match {
+    case(Cons(h1, t1), Cons(h2, t2)) => Cons(combine(h1, h2), zipWith(t1, t2)(combine))
     case (Nil, Nil) => Nil
+  }
+
+  def startsWith[A](sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
+    case(_, Nil) => true
+    //case(Nil, Cons(_,_)) => false
+    case(Cons(h1,t1), Cons(h2,t2)) if h1 == h2 => startsWith(t1, t2)
+    case _ => false
+  }
+
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = sup match {
+    case(Nil) => false
+    case(Cons(_, t)) if startsWith(sup, sub) => true
+    case(Cons(_, t)) => hasSubsequence(t, sub)
   }
 }

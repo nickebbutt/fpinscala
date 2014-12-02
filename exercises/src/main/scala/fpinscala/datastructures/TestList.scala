@@ -76,4 +76,17 @@ class TestListFunctions extends FlatSpec with Matchers {
     zipped should equal (List(3,6,9))
   }
 
+  "Starts with " should " be true if the first items of two lists match " in {
+    List.startsWith(List(1,2,3), List(1,2)) should equal (true)
+    List.startsWith(List(1,2,3), List(1,3)) should equal (false)
+    List.startsWith(List(1,2,3), List(1,2,3,4)) should equal (false)
+  }
+
+  "Has subsequence " should " be true if the parent list contains the child as a subsequence " in {
+    List.hasSubsequence(List(1,2,3), List(1, 2)) should equal (true)
+    List.hasSubsequence(List(1,2,3), List(2, 3)) should equal (true)
+    List.hasSubsequence(List(1,2,3,4), List(2, 3)) should equal (true)
+    List.hasSubsequence(List(1,2,3,4), List(2, 5)) should equal (false)
+  }
+
 }
