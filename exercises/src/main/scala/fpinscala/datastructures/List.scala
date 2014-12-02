@@ -161,4 +161,9 @@ This could also be implemented directly using `foldRight`.
     case(Cons(h1, t1), Cons(h2, t2)) => Cons(h1 + h2, addPairwise(t1, t2))
     case (Nil, Nil) => Nil
   }
+
+  def zipWith[A](a: List[A], b: List[A])( add : (A, A) => A ): List[A] = (a, b) match {
+    case(Cons(h1, t1), Cons(h2, t2)) => Cons(add(h1, h2), zipWith(t1, t2)(add))
+    case (Nil, Nil) => Nil
+  }
 }

@@ -71,4 +71,9 @@ class TestListFunctions extends FlatSpec with Matchers {
     zipped should equal (List(3,6,9))
   }
 
+  "Test zip " should " zip together list contents " in {
+    val zipped = List.zipWith(List(1,2,3), List(2,4,6))( _+_ )
+    zipped should equal (List(3,6,9))
+  }
+
 }
